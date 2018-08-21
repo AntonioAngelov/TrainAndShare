@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Register</h1>
+  <form [formGroup]="registrationForm" (ngSubmit)="Submit()">
+    <div cdkTrapFocus class="form-group col-sm-6">
+      <label class="form-label">Username:</label>
+      <input class="form-control" type="text" name="username" formControlName="Username" />
+      <form-control-messages [controlName]="'UserName'"></form-control-messages>
+
+      <label class="form-label">First Name:</label>
+      <input class="form-control" type="text" name="firstName" formControlName="FirstName" />
+      <form-control-messages [controlName]="'FirstName'"></form-control-messages>
+
+      <label class="form-label">Last Name:</label>
+      <input class="form-control" type="text" name="lastName" formControlName="LastName" />
+      <form-control-messages [controlName]="'LastName'"></form-control-messages>
+
+      <label class="form-label">Email:</label>
+      <input class="form-control" type="text" name="email" formControlName="Email" />
+      <form-control-messages [controlName]="'Email'"></form-control-messages>
+
+      <label class="form-label">Password:</label>
+      <input class="form-control" type="{{ showPassword ? 'text' : 'password'}}" name="password" formControlName="Password"/>
+      <button class="glyphicon glyphicon-eye-open" type="checkbox" (click)="changePasswordVisibility()"></button>
+      <form-control-messages [controlName]="'Password'"></form-control-messages>
+
+      <button type="submit" class="btn btn-dark" [disabled]="registrationForm.invalid">Register</button>
+    </div>
+  </form>
+</div>
