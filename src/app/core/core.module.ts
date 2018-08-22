@@ -16,7 +16,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     CommonModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(CORE_MODULE_EFFECTS),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    })
   ],
   declarations: [],
   providers: [

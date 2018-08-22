@@ -21,7 +21,7 @@ export function trainigsReducer(state: TrainingsState = initialState, action: Tr
             const userId = action.payload.ownerId;
             const newTraining = action.payload;
             const newState = Object.assign({}, state);
-
+            console.log('reducer')
             newState.userIds = [...newState.userIds, userId];
             newState.trainingsByUserId[userId] = newTraining;
 

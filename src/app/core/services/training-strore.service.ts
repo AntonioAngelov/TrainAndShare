@@ -9,6 +9,7 @@ export class TrainingStoreService {
     constructor(private store: Store<fromRoot.AppState>) {}
 
     public createTraining(training: Training) {
+        console.log('store-service')
         this.store.dispatch(new TrainingActions.CreateTrainingAction(training));
     }
 }

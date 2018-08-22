@@ -9,7 +9,7 @@ export class TrainingService {
     }
     public createTraining(training: Training) {
         const newTrainig: Training = {_id: 'id', name: 'Name', description: 'description', ownerId: 'ownerid', instructions: 'instructions'} 
-
+        console.log('service');
         return of(newTrainig);
     }
 }
