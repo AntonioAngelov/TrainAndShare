@@ -4,12 +4,12 @@
     <div cdkTrapFocus class="form-group col-sm-6">
       <label class="form-label">Username:</label>
       <input class="form-control is-invalid" type="text" name="username" formControlName="Username" />
-      <form-control-messages [controlName]="'Email'"></form-control-messages>
+      <app-form-control-messages [controlName]="'Email'"></app-form-control-messages>
 
       <label class="form-label">Password:</label>
       <button class="glyphicon glyphicon-eye-open" type="checkbox" (click)="changePasswordVisibility()"></button>
       <input class="form-control is-invalid" type="{{ showPassword ? 'text' : 'password'}}" name="password" formControlName="Password"/>      
-      <form-control-messages [controlName]="'Password'"></form-control-messages>
+      <app-form-control-messages [controlName]="'Password'"></app-form-control-messages>
 
       <button type="submit" class="btn btn-dark" [disabled]="loginForm.invalid">Login</button>
     </div>

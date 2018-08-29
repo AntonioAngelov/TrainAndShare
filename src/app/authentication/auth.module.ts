@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { authComponents } from './index';
-import { AuthService } from './auth.service';
 import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +14,10 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   providers: [
-    AuthService
   ]
 })
 export class AuthModule { }

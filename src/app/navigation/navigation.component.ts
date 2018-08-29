@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../authentication/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../core/services';
 
 @Component({
   selector: 'app-navigation',
@@ -8,31 +8,29 @@ import { AuthService } from '../authentication/auth.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  dropdownLi : string = "nav-item dropdown";
-  dropdownMenu : string = "dropdown-menu";
+  dropdownLi = 'nav-item dropdown';
+  dropdownMenu = 'dropdown-menu';
 
   public currentUsername: string;
+  public userId: string;
+
   constructor(
-    private router : Router,
-    private authService : AuthService
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {  }
 
   ngOnInit() {
     this.currentUsername = this.authService.getUsername();
+    this.userId = this.authService.getUserId();
   }
 
-  logout() {
+  public logout() {
     localStorage.clear();
     this.router.navigate(['/home']);
   }
 
-  expand() {
-    this.dropdownLi.endsWith('show') 
-    ? this.dropdownLi = "nav-item dropdown" 
-    : this.dropdownLi = "nav-item dropdown show";
-
-    this.dropdownMenu.endsWith('show')
-    ? this.dropdownMenu = "dropdown-menu"
-    : this.dropdownMenu = "dropdown-menu show";
+  public navigate() {
+    this.router.navigate(['/trainings', this.userId]);
   }
 }

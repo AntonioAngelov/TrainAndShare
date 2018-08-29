@@ -37,5 +37,5 @@ export enum StringType {
     /**
      * MaxText.
      */
-    MaxText = 2147483647
+    MaxText = 20000
 }

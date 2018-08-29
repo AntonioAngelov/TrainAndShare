@@ -1,14 +1,20 @@
 import { Component, OnInit, Input, Optional, Host, SkipSelf } from '@angular/core';
-import { ControlContainer, FormGroupName, AbstractFormGroupDirective, FormGroupDirective, FormArrayName, AbstractControl } from '@angular/forms';
+import {
+    ControlContainer,
+    FormGroupName,
+    AbstractFormGroupDirective,
+    FormGroupDirective,
+    FormArrayName,
+    AbstractControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'form-control-messages',
+  selector: 'app-form-control-messages',
   templateUrl: './form-control-message.component.html',
   styleUrls: ['./form-control-message.component.css']
 })
 export class FormControlMessageComponent implements OnInit {
-  
+
     public id: string;
 
     @Input()
@@ -16,7 +22,7 @@ export class FormControlMessageComponent implements OnInit {
 
     @Input() public control: AbstractControl;
 
-    @Input('controlName') 
+    @Input('controlName')
     public controlName: string;
 
     @Input() public color: '-rose-1' | 'white' = '-rose-1';

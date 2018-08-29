@@ -10,16 +10,15 @@ import {
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AuthService } from '../authentication/auth.service';
+import { AuthService } from '../core/services';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  
   constructor(
-    private toastr: ToastrService, 
-    private router: Router, 
-    private authService: AuthService){      
+    private toastr: ToastrService,
+    private router: Router,
+    private authService: AuthService) {
     }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -41,21 +40,19 @@ export class JwtInterceptor implements HttpInterceptor {
 
     return next.handle(request)
         .pipe(tap((res: HttpEvent<any>) => {
-
-          
            if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX')) {
              this.toastr.success('Successful registration.');
-             this.router.navigate(['/login'])
-           } else if(res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX/login')) {
+             this.router.navigate(['/login']);
+           } else if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX/login')) {
             this.saveToken(res.body);
 
             this.toastr.success('Successful login.');
-             this.router.navigate(['/home'])
+             this.router.navigate(['/home']);
            }
-        }))
+        }));
   }
 
-  private saveToken(data){
+  private saveToken(data) {
     localStorage.setItem('username', data['username']);
     localStorage.setItem('authToken', data['_kmd']['authtoken']);
     localStorage.setItem('userId', data['_id']);

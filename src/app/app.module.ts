@@ -10,20 +10,19 @@ import { AuthModule } from './authentication/auth.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
-import { TrainingsComponent } from './~trainings/trainings/trainings.component';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
-import { SharedModule } from './shared/shared.module'
+import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { TrainingsModule } from './~trainings/trainings.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    HomeComponent,
-    TrainingsComponent
+    HomeComponent
   ],
   imports: [
     FormsModule,
@@ -35,7 +34,8 @@ import { CoreModule } from './core/core.module';
     ReactiveFormsModule,
     AuthModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    TrainingsModule
   ],
   providers: [
     {

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../core/services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StringType } from '../../shared/model';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  public showPassword: boolean = false;
+  public showPassword: boolean;
 
   public username = new FormControl(null, [Validators.required, Validators.maxLength(StringType.SmallText)]);
   public firstName = new FormControl(null, [Validators.required]);
@@ -27,18 +27,17 @@ export class RegisterComponent implements OnInit {
   });
 
   constructor(
-    private authService : AuthService) {
+    private authService: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  public test(asd){
-    console.log(asd)
+  public test(asd) {
   }
 
   public Submit() {
-    if(this.registrationForm.valid) {
+    if (this.registrationForm.valid) {
       const groupValue = this.registrationForm.value;
 
       const firstName = groupValue.FirstName;

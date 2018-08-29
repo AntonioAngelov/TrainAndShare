@@ -10,7 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [FormControlMessageComponent],
-  exports: 
+  exports:
   [
     FormControlMessageComponent,
     ReactiveFormsModule,
