@@ -6,6 +6,7 @@ import {
   AuthService,
   TrainingStoreService
 } from '../../core/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-training',
@@ -18,21 +19,20 @@ export class CreateTrainingComponent implements OnInit {
   public name = new FormControl(null, [Validators.required, Validators.maxLength(StringType.SmallText)]);
   public description = new FormControl(null, [Validators.maxLength(StringType.HugeText)]);
   public instructions = new FormControl(null, [Validators.required, Validators.maxLength(StringType.MaxText)]);
-  public videoUrl = new FormControl(null, []);
   public isPublic = new FormControl(false, [Validators.required]);
 
   public trainingForm: FormGroup = new FormGroup({
     Name: this.name,
     Description: this.description,
     Instructions: this.instructions,
-    VideoUrl: this.videoUrl,
     IsPublic: this.isPublic
   });
 
 
   constructor(
     private authService: AuthService,
-    private trainingStoreService: TrainingStoreService) {
+    private trainingStoreService: TrainingStoreService,
+    private router: Router) {
   }
 
   public ngOnInit() {
@@ -47,11 +47,12 @@ export class CreateTrainingComponent implements OnInit {
       name: groupValue.Name,
       description: groupValue.Description,
       instructions: groupValue.Instructions,
-      videoUrl: groupValue.VideoUrl,
       isPublic: groupValue.IsPublic
     };
 
     this.trainingStoreService.createTraining(training);
+
+    this.router.navigate(['/trainings', this.ownerId]);
   }
 
 }

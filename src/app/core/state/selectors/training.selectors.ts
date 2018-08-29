@@ -11,7 +11,8 @@ export const getTrainingsByUserIdState = createSelector(
 
 export const getAreTrainingLoadedByUserId = createSelector(
     getTrainingsByUserIdState,
-    (trainings) => (userId: string) => !!trainings[userId]);
+    (trainings) => (userId: string) => !!trainings[userId]
+);
 
 export const getTrainingsByUserId = createSelector(
     getTrainingsByUserIdState,
@@ -23,4 +24,23 @@ export const getTrainingsByUserId = createSelector(
         }
 
         return filteredTrainings;
-    });
+    }
+);
+
+ export const getIsTrainingLoaded = createSelector(
+    getTrainingsByUserIdState,
+    (trainings) =>
+        (userId: string, trainingId: string) =>
+        !!trainings[userId] && !!trainings[userId]
+             .find(training => training._id === trainingId)
+ );
+
+export const getTrainingById = createSelector(
+    getTrainingsByUserIdState,
+     (trainings) =>
+         (userId: string, trainingId: string) =>
+         !!trainings[userId]
+         ? trainings[userId].find(training => training._id === trainingId)
+         : null
+    );
+

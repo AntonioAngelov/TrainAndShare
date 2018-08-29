@@ -4,6 +4,5 @@ export class Training {
     public name: string;
     public description?: string;
     public instructions: string;
-    public videoUrl?: string;
     public isPublic: boolean;
 }

@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import {
   TrainingStoreService,
   TrainingService,
-  AuthService
+  AuthService,
+  UserService,
+  UserStoreService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -25,7 +27,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   providers: [
     TrainingStoreService,
     TrainingService,
-    AuthService
+    AuthService,
+    UserService,
+    UserStoreService
   ]
 })
 export class CoreModule { }

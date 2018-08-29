@@ -24,4 +24,12 @@ export class TrainingStoreService {
     public getTrainingsByUserId(userId: string) {
         return this.store.select((state) => trainingSelectors.getTrainingsByUserId(state)(userId));
     }
+
+    public getIsTrainingLoaded(userId: string, trainingId: string) {
+        return this.store.select((state) => trainingSelectors.getIsTrainingLoaded(state)(userId, trainingId));
+    }
+
+    public getTrainingById(userId: string, trainingId: string) {
+        return this.store.select((state) => trainingSelectors.getTrainingById(state)(userId, trainingId));
+    }
 }

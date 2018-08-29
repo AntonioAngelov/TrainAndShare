@@ -13,12 +13,12 @@ export class TrainingService extends BaseService {
     }
 
     public createTraining(training: Training) {
-        return this.http.post(this.constructUrl(this.trainingsEndpoint), JSON.stringify(training));
+        return this.http.post(this.constructUrl(this.appDataModule, this.trainingsEndpoint), JSON.stringify(training));
     }
 
     public getTrainingsByUserId(userId: string) {
         const query = {ownerId: userId};
 
-        return this.http.get<Training[]>(this.constructUrl(this.trainingsEndpoint, JSON.stringify(query)));
+        return this.http.get<Training[]>(this.constructUrl(this.appDataModule, this.trainingsEndpoint, JSON.stringify(query)));
     }
 }

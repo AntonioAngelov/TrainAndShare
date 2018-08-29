@@ -7,7 +7,9 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { UserTrainingsComponent } from './~trainings/user-trainings/user-trainings.component';
 import { CreateTrainingComponent } from './~trainings/create/create.component';
+import { TrainingsBaseComponent } from './~trainings/trainings-base/trainings-base.component';
 import { UserTrainingsGuard } from './~trainings/user-trainings/user-trainings.guard';
+import { TrainingDetailsComponent } from './~trainings/training-details/training-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -15,15 +17,20 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'trainings',
+    component: TrainingsBaseComponent,
     children: [
+      {
+        path: 'create',
+        component: CreateTrainingComponent
+      },
       {
         path: ':userId',
         canActivate: [UserTrainingsGuard],
         component: UserTrainingsComponent
       },
       {
-        path: 'create',
-        component: CreateTrainingComponent
+        path: 'details/:trainingId',
+        component: TrainingDetailsComponent
       }
     ]
    }

@@ -1,11 +1,12 @@
 <button type="button" class="btn btn-primary" (click)="onCreateNewTraining()">Create new training</button>
 
-<div class="card" *ngFor="let training of (trainings$ | async)">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-</div>
+<ng-container class="row">
+  <div class="card col-md-10 offset-md-1"   *ngFor="let training of (trainings$ | async)">
+    <div class="card-body">
+      <h2 class="card-title">{{training?.name}}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">{{training?.isPublic | isPublicLabel}}</h6>
+      <p class="card-text" *ngIf="!!training.description" ng-class="{'green': training.isPublic, 'red':!training.isPublic}">{{training.description}}</p>
+      <a [routerLink]="['/trainings/details/{training._id{}}']" class="btn btn-primary">View</a>
+    </div>
+  </div>
+</ng-container>
