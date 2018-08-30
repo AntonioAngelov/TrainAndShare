@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class CreateTrainingComponent implements OnInit {
   private ownerId: string;
 
-  public name = new FormControl(null, [Validators.required, Validators.maxLength(StringType.SmallText)]);
+  public name = new FormControl(null, [Validators.required, Validators.maxLength(StringType.NormalText)]);
   public description = new FormControl(null, [Validators.maxLength(StringType.HugeText)]);
   public instructions = new FormControl(null, [Validators.required, Validators.maxLength(StringType.MaxText)]);
   public isPublic = new FormControl(false, [Validators.required]);

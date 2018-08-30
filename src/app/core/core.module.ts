@@ -6,7 +6,8 @@ import {
   TrainingService,
   AuthService,
   UserService,
-  UserStoreService
+  UserStoreService,
+  ExerciseService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,7 +21,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(CORE_MODULE_EFFECTS),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
+      maxAge: 25,
     })
   ],
   declarations: [],
@@ -29,7 +30,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     TrainingService,
     AuthService,
     UserService,
-    UserStoreService
+    UserStoreService,
+    ExerciseService
   ]
 })
 export class CoreModule { }

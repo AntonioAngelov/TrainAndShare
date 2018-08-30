@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'trainings',
+  {
+    path: 'trainings',
     component: TrainingsBaseComponent,
     children: [
       {
@@ -26,19 +27,24 @@ const routes: Routes = [
       {
         path: ':userId',
         canActivate: [UserTrainingsGuard],
-        component: UserTrainingsComponent
-      },
-      {
-        path: 'details/:trainingId',
-        component: TrainingDetailsComponent
+        children: [
+          {
+            path: '',
+            component: UserTrainingsComponent
+          },
+          {
+            path: 'details/:trainingId',
+            component: TrainingDetailsComponent
+          }
+        ]
       }
     ]
-   }
+  }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes)],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

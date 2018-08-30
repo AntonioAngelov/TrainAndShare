@@ -1,3 +1,39 @@
-<h2>By {{(user$ | async)?.username}}</h2>
+<div [ngClass]="{'form-container': inEdit}">
+    <button class="btn btn-success" (click)="onChangeEdit()" *ngIf="!inEdit && canEdit">Edit</button>
+    <button class="btn btn-danger" (click)="onDelete()" *ngIf="!inEdit && canEdit">Delete</button>
+    <form [formGroup]="trainingForm" (ngSubmit)="editTraining()">
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" formControlName="Name" [attr.disabled]="!inEdit ? '' : null">
+                <app-form-control-messages [controlName]="'Name'"></app-form-control-messages>
+            </div>
+        </div>
 
-<h2>Training: {{training?.name}}</h2>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="description" formControlName="Description" [attr.disabled]="!inEdit ? '' : null"></textarea>
+                <app-form-control-messages [controlName]="'Description'"></app-form-control-messages>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="instructions" class="col-sm-2 col-form-label">Instructions</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="instructions" formControlName="Instructions" [attr.disabled]="!inEdit ? '' : null"></textarea>
+                <app-form-control-messages [controlName]="'Instructions'"></app-form-control-messages>
+            </div>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="makePublic" formControlName="IsPublic" [attr.disabled]="!inEdit ? '' : null">
+            <label class="form-check-label" for="makePublic">
+                Make it public
+            </label>
+            <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
+        </div>
+        <button class="btn btn-default" (click)="onChangeEdit()" *ngIf="inEdit">Cancel</button>
+        <button type="submit" class="btn btn-success" [disabled]="trainingForm.invalid" *ngIf="inEdit">Edit</button>
+    </form>
+</div>

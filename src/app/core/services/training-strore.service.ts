@@ -32,4 +32,12 @@ export class TrainingStoreService {
     public getTrainingById(userId: string, trainingId: string) {
         return this.store.select((state) => trainingSelectors.getTrainingById(state)(userId, trainingId));
     }
+
+    public deleteTraining(training: Training) {
+        this.store.dispatch(new TrainingActions.DeleteTrainingAction(training));
+    }
+
+    public editTraining(training: Training) {
+        this.store.dispatch(new TrainingActions.EditTrainingAction(training));
+    }
 }

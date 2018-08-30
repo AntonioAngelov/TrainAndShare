@@ -1,12 +1,17 @@
-<button type="button" class="btn btn-primary" (click)="onCreateNewTraining()">Create new training</button>
+<div class="jumbotron">
+  <h1>{{user?.username}}&#39;s trainings</h1>
+</div>
+
+<button id="create-training" type="button" class="btn btn-success" (click)="onCreateNewTraining()" *ngIf="canEdit">Create new training</button>
 
 <ng-container class="row">
-  <div class="card col-md-10 offset-md-1"   *ngFor="let training of (trainings$ | async)">
+  <div class="card col-md-10 offset-md-1" *ngFor="let training of (trainings$ | async)">
     <div class="card-body">
       <h2 class="card-title">{{training?.name}}</h2>
-      <h6 class="card-subtitle mb-2 text-muted">{{training?.isPublic | isPublicLabel}}</h6>
-      <p class="card-text" *ngIf="!!training.description" ng-class="{'green': training.isPublic, 'red':!training.isPublic}">{{training.description}}</p>
-      <a [routerLink]="['/trainings/details/{training._id{}}']" class="btn btn-primary">View</a>
+      <span [ngClass]="{'badge': true, 'badge-success': training?.isPublic, 'badge-warning': !training?.isPublic}">{{training?.isPublic | isPublicLabel}}</span>
+      <p class="card-text" *ngIf="!!training.description">{{training.description}}</p>
+      <a (click)="viewTraining(training._id)" class="btn btn-primary">View</a>
+      <a (click)="onDeleteTraining(training)" class="btn btn-danger">Delete</a>
     </div>
   </div>
 </ng-container>

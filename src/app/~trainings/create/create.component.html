@@ -1,24 +1,32 @@
-<div class="container">
+<div class="container container-fluid">
   <h1>New training</h1>
   <form [formGroup]="trainingForm" (ngSubmit)="createTraining()">
-    <div cdkTrapFocus class="form-group col-sm-6">
-      <label class="form-label">Name:</label>
-      <input class="form-control is-invalid" type="text" name="name" formControlName="Name" />
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" formControlName="Name">
       <app-form-control-messages [controlName]="'Name'"></app-form-control-messages>
-
-      <label class="form-label">Description:</label>
-      <textarea class="form-control is-invalid" type="text" name="description" formControlName="Description"></textarea>      
-      <app-form-control-messages [controlName]="'Description'"></app-form-control-messages>
-
-      <label class="form-label">Instructions:</label>
-      <textarea class="form-control is-invalid" type="text" name="instructions" formControlName="Instructions"></textarea>      
-      <app-form-control-messages [controlName]="'Instructions'"></app-form-control-messages>
-
-      <label class="form-label">Make it public:</label>
-      <input class="form-control is-invalid" type="checkbox" name="IsPublic" formControlName="IsPublic"/>      
-      <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
-
-      <button type="submit" class="btn btn-dark" [disabled]="trainingForm.invalid">Create</button>
     </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" formControlName="Description"></textarea>
+      <app-form-control-messages [controlName]="'Description'"></app-form-control-messages>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Instructions</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" formControlName="Instructions"></textarea>
+      <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="makePublic" formControlName="IsPublic">
+      <label class="form-check-label" for="makePublic">
+        Make it public
+      </label>
+      <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="trainingForm.invalid">Create</button>
   </form>
 </div>

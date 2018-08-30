@@ -17,20 +17,13 @@ export class NavigationComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    public authService: AuthService
   ) {  }
 
   ngOnInit() {
-    this.currentUsername = this.authService.getUsername();
-    this.userId = this.authService.getUserId();
-  }
-
-  public logout() {
-    localStorage.clear();
-    this.router.navigate(['/home']);
   }
 
   public navigate() {
-    this.router.navigate(['/trainings', this.userId]);
+    this.router.navigate(['/trainings', this.authService.getUserId()]);
   }
 }

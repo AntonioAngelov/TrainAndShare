@@ -1,0 +1,28 @@
+.container {
+    background-color: #EBEBED;
+    height:100vh;
+    width: 100vh;
+    display: block;
+    padding-top: 30px;
+}
+h1 {
+    padding-bottom: 20px;   
+}
+
+input[type='checkbox'] {
+    width: 30px; 
+    height: 30px;
+}
+
+.form-check-label {
+    padding-left: 30px;
+    font-size: 20px;   
+}
+
+.form-check {
+    margin-bottom: 30px;
+}
+
+button {
+    width: 200px;
+}

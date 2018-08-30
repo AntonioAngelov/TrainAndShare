@@ -25,8 +25,8 @@ export class AuthService extends BaseService {
   }
 
 
-  public logout(): Observable<Object> {
-    return this.http.post<object>(this.logoutUrl, {});
+  public logout() {
+    this.clearSession();
   }
 
   public checkIfLogged() {
