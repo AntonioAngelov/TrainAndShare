@@ -21,10 +21,8 @@ export function trainigsReducer(state: TrainingsState = initialState, action: Tr
 
             const newState = Object.assign({}, state);
 
-            newState.trainingsByUserId[userId] = [];
-
-            if (!!newState.trainingsByUserId[userId]) {
-                newState.trainingsByUserId[userId] = [...newState.trainingsByUserId[userId]];
+            if (!newState.trainingsByUserId[userId]) {
+                newState.trainingsByUserId[userId] = [];
             }
 
             newState.trainingsByUserId[userId].push(newTraining);

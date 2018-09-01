@@ -24,7 +24,6 @@ export class TrainingService extends BaseService {
     }
 
     public deleteTraining(training: Training) {
-
         return this.http.delete(this.constructUrl(this.appDataModule, this.trainingsEndpoint + '/' + training._id))
             .pipe( switchMap((count) => of(training)));
     }
@@ -32,5 +31,11 @@ export class TrainingService extends BaseService {
     public editTraining(training: Training) {
         return this.http
         .put<Training>(this.constructUrl(this.appDataModule, this.trainingsEndpoint + '/' + training._id), JSON.stringify(training));
+    }
+
+    public getPublicTrainings() {
+        const query = { isPublic: true };
+
+        return this.http.get<Training[]>(this.constructUrl(this.appDataModule, this.trainingsEndpoint, JSON.stringify(query)));
     }
 }

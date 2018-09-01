@@ -1,0 +1,11 @@
+<div id="locked-users">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let user of users; let i = index">
+            <span class="float-left">{{i + 1}}. </span>
+             {{user?.username}}
+            <span class="float-right">
+                <button class="btn btn-warning small" (click)="unLockUser(user)">Unlock Account</button>
+            </span>
+        </li>
+    </ul>
+</div>

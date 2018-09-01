@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControlMessageComponent } from './forms/form-control-message/form-control-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IsPublicLabelPipe } from './pipes/is-public-label.pipe';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   imports: [
@@ -10,13 +10,13 @@ import { IsPublicLabelPipe } from './pipes/is-public-label.pipe';
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [FormControlMessageComponent, IsPublicLabelPipe],
+  declarations: [IsPublicLabelPipe, SafePipe],
   exports:
   [
-    FormControlMessageComponent,
     ReactiveFormsModule,
     FormsModule,
-    IsPublicLabelPipe
-  ]
+    IsPublicLabelPipe,
+    SafePipe
+  ],
 })
 export class SharedModule { }

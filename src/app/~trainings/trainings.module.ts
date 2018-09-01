@@ -8,6 +8,8 @@ import { CoreModule } from '../core/core.module';
 import { TrainingsBaseComponent } from './trainings-base/trainings-base.component';
 import { RouterModule } from '@angular/router';
 import { TrainingDetailsComponent } from './training-details/training-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PublicTrainingsComponent } from './public-trainings/public-trainings.component';
 
 @NgModule({
   imports: [
@@ -16,17 +18,21 @@ import { TrainingDetailsComponent } from './training-details/training-details.co
     ReactiveFormsModule,
     SharedModule,
     CoreModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ],
   declarations: [
     UserTrainingsComponent,
     CreateTrainingComponent,
     TrainingsBaseComponent,
+    PublicTrainingsComponent,
     TrainingDetailsComponent
   ],
   exports: [
     UserTrainingsComponent,
-    CreateTrainingComponent
+    CreateTrainingComponent,
+    PublicTrainingsComponent,
+    TrainingDetailsComponent
   ]
 })
 export class TrainingsModule { }

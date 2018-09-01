@@ -1,8 +1,29 @@
-.btn {
+.btn.big {
     width: 200px;
     margin: 30px 7px;
 }
 
+.btn.small {
+    margin-right: 10px;
+}
+
 .form-container {
     margin-top: 40px; 
+}
+
+.list-group {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.list-group-item:hover {
+    background-color: #E8F6F9;
+}
+
+.list-group-item {
+    height: 60;
+}
+
+#form-container {
+    margin-bottom: 50px;
 }

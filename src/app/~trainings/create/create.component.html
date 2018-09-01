@@ -3,20 +3,23 @@
   <form [formGroup]="trainingForm" (ngSubmit)="createTraining()">
     <div class="form-group">
       <label for="exampleFormControlInput1">Name</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" formControlName="Name">
-      <app-form-control-messages [controlName]="'Name'"></app-form-control-messages>
+      <input type="text" class="form-control is-invalid" id="exampleFormControlInput1" formControlName="Name">
+      <div class="invalid-feedback" *ngIf="nameVal.invalid && (nameVal.dirty || nameVal.touched)">
+        Name required.
+      </div>
     </div>
 
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Description</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" formControlName="Description"></textarea>
-      <app-form-control-messages [controlName]="'Description'"></app-form-control-messages>
     </div>
 
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Instructions</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" formControlName="Instructions"></textarea>
-      <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
+      <textarea class="form-control is-invalid" id="exampleFormControlTextarea1" rows="8" formControlName="Instructions"></textarea>
+      <div class="invalid-feedback" *ngIf="instrictionsVal.invalid && (instrictionsVal.dirty || instrictionsVal.touched)">
+        Instructions required.
+      </div>
     </div>
 
     <div class="form-check">
@@ -24,7 +27,6 @@
       <label class="form-check-label" for="makePublic">
         Make it public
       </label>
-      <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
     </div>
 
     <button type="submit" class="btn btn-success" [disabled]="trainingForm.invalid">Create</button>

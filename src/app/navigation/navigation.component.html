@@ -1,28 +1,53 @@
 <nav class="navbar navbar-light bg-light">
-    <a id="brand" routerLink="/home">Train&#38;Share</a>
-    <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link"  (click)="navigate()" *ngIf="authService.isAuthenticated()">My Trainings</a>
-        </li>
-      </ul>
-    <ul class="nav nav-pills">
-      <li class="nav-item" *ngIf="!authService.isAuthenticated()">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-      <li class="nav-item" *ngIf="!authService.isAuthenticated()">
-        <a class="nav-link" routerLink="/register">Register</a>
-      </li>
-      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
-        <a  class="nav-link dropdown-toggle"
-            data-toggle="dropdown"
-            role="button" aria-haspopup="true" 
-            aria-expanded="false">
-          {{authService.getUsername()}}
-        </a>
-        <div class="dropdown-menu" role="menu">
-          <div role="separator" class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="authService.logout()">Logout</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
+  <a id="brand" routerLink="/home">Train&#38;Share</a>
+  <ul class="nav float-left" *ngIf="!isAdminView">
+    <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        Trainings
+      </a>
+      <div class="dropdown-menu" role="menu">
+        <a class="dropdown-item" (click)="publicTrainings()">Public Tranings</a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="myTrainings()">My Tranings</a>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="nav" *ngIf="!isAdminView">
+    <li class="nav-item" *ngIf="authService.isAuthenticated()">
+      <a class="nav-link" routerLink="/trainings/create" id="create-training">Create training</a>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills" *ngIf="!isAdminView">
+    <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+      <a class="nav-link" routerLink="/login">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+      <a class="nav-link" routerLink="/register">Register</a>
+    </li>
+    <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        {{authService.getUsername()}}
+      </a>
+      <div class="dropdown-menu" role="menu">
+        <a class="dropdown-item" (click)="onLogout()">Logout</a>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills" *ngIf="isAdminView">
+    <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        Users
+      </a>
+      <div class="dropdown-menu" role="menu">
+        <a class="dropdown-item" (click)="activeUsers()">Active</a>
+        <a class="dropdown-item" (click)="lockedUsers()">Locked</a>
+      </div>
+    </li>
+  </ul>
+
+  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" *ngIf="authService.isAdmin() && !isAdminView" (click)="changeView()">Admin</button>
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" *ngIf="isAdminView" (click)="changeView()">Back</button>
+</nav>

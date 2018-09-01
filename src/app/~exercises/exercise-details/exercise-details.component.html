@@ -1,0 +1,35 @@
+<!--<iframe class="e2e-iframe-trusted-src" width="640" height="390" [src]="exercise?.videoUrl | safe"></iframe>-->
+
+<h1>Exercise details</h1>
+
+<dl id="details">
+    <div *ngIf="exercise?.name">
+        <dt>Name</dt>
+        <dd>{{exercise?.name}}</dd>
+    </div>
+
+    <div *ngIf="exercise?.description">
+        <dt>Description</dt>
+        <dd>{{exercise?.description}}</dd>
+    </div>
+
+    <div *ngIf="exercise?.instructions">
+        <dt>Instructions</dt>
+        <dd>{{exercise?.instructions}}</dd>
+    </div>
+
+    <div *ngIf="exercise?.sets">
+        <dt>Sets</dt>
+        <dd>{{exercise?.sets}}</dd>
+    </div>
+
+    <div *ngIf="exercise?.reps">
+        <dt>Reps</dt>
+        <dd>{{exercise?.reps}}</dd>
+    </div>
+
+    <div *ngIf="exercise?.videoUrl">
+            <dt>Video url</dt>
+            <dd>{{exercise?.videoUrl}}</dd>
+        </div>
+</dl>

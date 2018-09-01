@@ -7,7 +7,9 @@ import {
   AuthService,
   UserService,
   UserStoreService,
-  ExerciseService
+  ExerciseService,
+  ExerciseStoreService,
+  AdminService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,7 +33,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AuthService,
     UserService,
     UserStoreService,
-    ExerciseService
+    ExerciseService,
+    ExerciseStoreService,
+    AdminService
   ]
 })
 export class CoreModule { }

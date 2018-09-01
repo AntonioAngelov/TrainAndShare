@@ -37,8 +37,16 @@ export class AuthService extends BaseService {
     return localStorage.getItem('authToken');
   }
 
+  public getMarterToken(): string {
+    return localStorage.getItem('masterToken');
+  }
+
   public getUsername(): string {
     return localStorage.getItem('username');
+  }
+
+  public isAdmin(): boolean {
+    return localStorage.getItem('isAdmin') === 'true';
   }
 
   public getUserId(): string {

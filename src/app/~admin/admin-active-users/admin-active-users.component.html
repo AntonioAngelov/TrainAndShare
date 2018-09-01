@@ -1,0 +1,12 @@
+<div id="active-users" *ngIf="!!users">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let user of users; let i = index">
+      <span class="float-left">{{i + 1}}. {{user?.username}}</span>
+      <span class="badge badge-warning" *ngIf="isAdmin(user)">Admin!</span>
+      <span class="float-right">
+        <button class="btn btn-danger small" (click)="lockUser(user)">Lock Account</button>
+        <button class="btn btn-warning small" (click)="makeAdmin(user)" *ngIf="!isAdmin(user)">Make Admin</button>
+      </span>
+    </li>
+  </ul>
+</div>

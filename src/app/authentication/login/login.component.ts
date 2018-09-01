@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { StringType } from '../../shared/model';
 import { LoginModel } from '../../models/login.model';
 
@@ -48,6 +48,14 @@ export class LoginComponent implements OnInit {
     // this.authService
       // .login(this.model)
       // .subscribe();
+  }
+
+  get usernameVal(): AbstractControl {
+    return this.loginForm.get('Username');
+  }
+
+  get passwordVal(): AbstractControl {
+    return this.loginForm.get('Password');
   }
 
 }

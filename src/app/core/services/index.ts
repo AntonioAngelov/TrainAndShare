@@ -5,3 +5,5 @@ export { UserService } from './user.service';
 export { UserStoreService } from './user-store.service';
 export { ExerciseService } from './exercise.service';
 export { ExerciseStoreService } from './exercise-store.service';
+
+export { AdminService } from './admin.service';

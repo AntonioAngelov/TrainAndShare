@@ -11,6 +11,8 @@ export class NavigationComponent implements OnInit {
   dropdownLi = 'nav-item dropdown';
   dropdownMenu = 'dropdown-menu';
 
+  public isAdminView = !!this.authService.getMarterToken();
+
   public currentUsername: string;
   public userId: string;
 
@@ -18,12 +20,37 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public authService: AuthService
-  ) {  }
+  ) { }
 
   ngOnInit() {
   }
 
-  public navigate() {
+  public myTrainings() {
     this.router.navigate(['/trainings', this.authService.getUserId()]);
+  }
+
+  public publicTrainings() {
+    this.router.navigate(['/trainings/public']);
+  }
+
+  public onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+  }
+
+  public changeView() {
+    this.router.navigate(['/home']);
+
+    localStorage.removeItem('masterToken');
+
+    this.isAdminView = !this.isAdminView;
+  }
+
+  public activeUsers() {
+    this.router.navigate(['admin/users/active']);
+  }
+
+  public lockedUsers() {
+    this.router.navigate(['admin/users/locked']);
   }
 }

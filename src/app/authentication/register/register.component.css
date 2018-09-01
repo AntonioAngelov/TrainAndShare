@@ -1,0 +1,17 @@
+form { 
+    margin: 0 auto;
+}
+
+.fa-eye {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.container {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+h1 {
+    margin-bottom: 50px;
+}

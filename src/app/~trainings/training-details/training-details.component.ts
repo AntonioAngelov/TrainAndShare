@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Training, User } from '../../models';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Training, User, Exercise } from '../../models';
 import {
   TrainingStoreService,
   UserStoreService,
-  AuthService
+  AuthService,
+  ExerciseStoreService
 } from '../../core/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { switchMap, filter, take } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { StringType } from '../../shared/model';
 
 @Component({
@@ -16,7 +17,7 @@ import { StringType } from '../../shared/model';
   templateUrl: './training-details.component.html',
   styleUrls: ['./training-details.component.css']
 })
-export class TrainingDetailsComponent implements OnInit {
+export class TrainingDetailsComponent implements OnInit, OnDestroy {
   public inEdit = false;
   public canEdit = false;
 
@@ -26,7 +27,9 @@ export class TrainingDetailsComponent implements OnInit {
   private trainingId: string;
   private userId: string;
 
-  private subscribtions: Subscription[] = [];
+  public exercises$: Observable<Exercise[]>;
+
+  private subscriptions: Subscription[] = [];
 
   public name = new FormControl(null, [Validators.required, Validators.maxLength(StringType.NormalText)]);
   public description = new FormControl(null, [Validators.maxLength(StringType.HugeText)]);
@@ -45,10 +48,11 @@ export class TrainingDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userStoreService: UserStoreService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private exerciseStoreService: ExerciseStoreService) { }
 
   ngOnInit() {
-    this.subscribtions.push(
+    this.subscriptions.push(
       this.route.params
         .subscribe(params => {
           this.trainingId = params['trainingId'];
@@ -69,7 +73,7 @@ export class TrainingDetailsComponent implements OnInit {
         })
     );
 
-    this.subscribtions.push(
+    this.subscriptions.push(
       this.trainingsStoreService.getTrainingById(this.userId, this.trainingId)
         .pipe(filter(training => !!training))
         .subscribe(training => {
@@ -82,6 +86,16 @@ export class TrainingDetailsComponent implements OnInit {
         }));
 
     this.user$ = this.userStoreService.getUser(this.userId);
+
+    const exercisesSub = this.exerciseStoreService.getAreExercisesLoadedByTrainingId(this.trainingId)
+      .subscribe(areloaded => {
+        if (!areloaded) {
+          this.exerciseStoreService.loadExercisesByTrainingId(this.trainingId);
+        }
+      });
+    this.subscriptions.push(exercisesSub);
+
+    this.exercises$ = this.exerciseStoreService.getExercisesLoadedByTrainingId(this.trainingId);
   }
 
   public onChangeEdit() {
@@ -104,7 +118,30 @@ export class TrainingDetailsComponent implements OnInit {
   public onDelete() {
     this.trainingsStoreService.deleteTraining(this.training);
 
-    this.router.navigate(['../../'], { relativeTo: this.route});
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 
+  public onAddTraining() {
+    this.router.navigate(['exercises', this.trainingId, 'create']);
+  }
+
+  public onRemoveExercise(exercise: Exercise) {
+    this.exerciseStoreService.deleteExercise(exercise);
+  }
+
+  public viewExercise(exerciseId: string) {
+    this.router.navigate(['exercises', this.trainingId, exerciseId]);
+  }
+
+  get nameVal(): AbstractControl {
+    return this.trainingForm.get('Name');
+  }
+
+  get instrictionsVal(): AbstractControl {
+    return this.trainingForm.get('Instructions');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 }

@@ -1,0 +1,19 @@
+<div id="container"> 
+    <div class="card" *ngFor="let training of trainings | paginate: {
+      id: 'allTrainings',
+      itemsPerPage: pageSize,
+      currentPage: currentPage
+    }">
+        <div class="card-header">
+          <span class="float-left float-left">Name: {{training?.name}}</span>
+          <span class="float-right">{{training?.ownerName}}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-text float-left">Description: {{training?.description}}</p>
+          <a class="btn btn-primary float-right" (click)="viewTraining(training)">View</a>
+        </div>
+      </div>      
+      <pagination-controls id="allTrainings" (pageChange)="pageChanged($event)" maxSize="20" directionLinks="true" autoHide="true"
+  previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageaLabel="page" screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+</div>

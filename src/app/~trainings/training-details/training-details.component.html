@@ -1,12 +1,14 @@
-<div [ngClass]="{'form-container': inEdit}">
-    <button class="btn btn-success" (click)="onChangeEdit()" *ngIf="!inEdit && canEdit">Edit</button>
-    <button class="btn btn-danger" (click)="onDelete()" *ngIf="!inEdit && canEdit">Delete</button>
+<div id="form-container" [ngClass]="{'form-container': inEdit}">
+    <button class="btn btn-success big" (click)="onChangeEdit()" *ngIf="!inEdit && canEdit">Edit</button>
+    <button class="btn btn-danger big" (click)="onDelete()" *ngIf="!inEdit && canEdit">Delete</button>
     <form [formGroup]="trainingForm" (ngSubmit)="editTraining()">
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" formControlName="Name" [attr.disabled]="!inEdit ? '' : null">
-                <app-form-control-messages [controlName]="'Name'"></app-form-control-messages>
+                <input type="text" class="form-control is-invalid" id="name" formControlName="Name" [attr.disabled]="!inEdit ? '' : null">
+                <div class="invalid-feedback" *ngIf="nameVal.invalid && (nameVal.dirty || nameVal.touched)">
+                    Name required.
+                </div>
             </div>
         </div>
 
@@ -14,26 +16,42 @@
             <label for="description" class="col-sm-2 col-form-label">Description</label>
             <div class="col-sm-10">
                 <textarea type="text" class="form-control" id="description" formControlName="Description" [attr.disabled]="!inEdit ? '' : null"></textarea>
-                <app-form-control-messages [controlName]="'Description'"></app-form-control-messages>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="instructions" class="col-sm-2 col-form-label">Instructions</label>
             <div class="col-sm-10">
-                <textarea type="text" class="form-control" id="instructions" formControlName="Instructions" [attr.disabled]="!inEdit ? '' : null"></textarea>
-                <app-form-control-messages [controlName]="'Instructions'"></app-form-control-messages>
+                <textarea type="text" class="form-control is-invalid" id="instructions" formControlName="Instructions" [attr.disabled]="!inEdit ? '' : null"></textarea>
+                <div class="invalid-feedback" *ngIf="instrictionsVal.invalid && (instrictionsVal.dirty || instrictionsVal.touched)">
+                    Instructions required.
+                </div>
             </div>
         </div>
 
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="makePublic" formControlName="IsPublic" [attr.disabled]="!inEdit ? '' : null">
             <label class="form-check-label" for="makePublic">
-                Make it public
+                Public
             </label>
-            <app-form-control-messages [controlName]="'IsPublic'"></app-form-control-messages>
         </div>
-        <button class="btn btn-default" (click)="onChangeEdit()" *ngIf="inEdit">Cancel</button>
-        <button type="submit" class="btn btn-success" [disabled]="trainingForm.invalid" *ngIf="inEdit">Edit</button>
+        <button class="btn btn-default big" (click)="onChangeEdit()" *ngIf="inEdit">Cancel</button>
+        <button type="submit" class="btn btn-success big" [disabled]="trainingForm.invalid" *ngIf="inEdit">Edit</button>
     </form>
+</div>
+<div>
+    <button class="btn btn-default big" (click)="onAddTraining()" *ngIf="canEdit">Add Exercise</button>
+</div>
+
+<div id="exercises">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let exercise of (exercises$ | async); let i = index">
+            <span class="float-left">{{i + 1}}. </span>
+            {{exercise?.name}}
+            <span class="float-right">
+                <button class="btn btn-default small" (click)="viewExercise(exercise?._id)">Details</button>
+                <button class="btn btn-danger small" (click)="onRemoveExercise(exercise)" *ngIf="canEdit">Remove</button>
+            </span>
+        </li>
+    </ul>
 </div>

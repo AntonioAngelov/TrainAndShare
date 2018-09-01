@@ -17,6 +17,9 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { TrainingsModule } from './~trainings/trainings.module';
+import { ExercisesModule } from './~exercises/exercises.module';
+import { EmbedVideo } from 'ngx-embed-video';
+import { AdminModule } from './~admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { TrainingsModule } from './~trainings/trainings.module';
     AuthModule,
     SharedModule,
     CoreModule,
-    TrainingsModule
+    TrainingsModule,
+    ExercisesModule,
+    AdminModule
   ],
   providers: [
     {

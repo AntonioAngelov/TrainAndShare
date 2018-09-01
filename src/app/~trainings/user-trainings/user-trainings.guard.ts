@@ -37,9 +37,6 @@ export class UserTrainingsGuard implements CanActivate {
           }
       );
 
-
-
-
     return true;
   }
 }

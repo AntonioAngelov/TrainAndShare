@@ -19,10 +19,17 @@ export class JwtInterceptor implements HttpInterceptor {
     private toastr: ToastrService,
     private router: Router,
     private authService: AuthService) {
-    }
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.getAuthtoken() !== null) {
+    if (this.authService.isAdmin() && this.authService.getMarterToken()) {
+      request = request.clone({
+        setHeaders: {
+          'Authorization': `Basic ${btoa(`${this.authService.appKey}:${this.authService.getMarterToken()}`)}`,
+          'Content-Type': 'application/json'
+        }
+      });
+    } else if (this.authService.getAuthtoken() !== null) {
       request = request.clone({
         setHeaders: {
           'Authorization': `Kinvey ${localStorage.getItem('authToken')}`,
@@ -39,20 +46,21 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request)
-        .pipe(tap((res: HttpEvent<any>) => {
-           if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX')) {
-             this.toastr.success('Successful registration.');
-             this.router.navigate(['/login']);
-           } else if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX/login')) {
-            this.saveToken(res.body);
+      .pipe(tap((res: HttpEvent<any>) => {
+        if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX')) {
+          this.toastr.success('Successful registration.');
+          this.router.navigate(['/login']);
+        } else if (res instanceof HttpResponse && res.url.endsWith('https://baas.kinvey.com/user/kid_Hy3D2b8IX/login')) {
+          this.saveToken(res.body);
 
-            this.toastr.success('Successful login.');
-             this.router.navigate(['/home']);
-           }
-        }));
+          this.toastr.success('Successful login.');
+          this.router.navigate(['/home']);
+        }
+      }));
   }
 
   private saveToken(data) {
+    localStorage.setItem('isAdmin', (data['roles'].filter(role => role === 'Admin').length > 0) ? 'true' : 'false');
     localStorage.setItem('username', data['username']);
     localStorage.setItem('authToken', data['_kmd']['authtoken']);
     localStorage.setItem('userId', data['_id']);
