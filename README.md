@@ -1,27 +1,21 @@
-# InterceptorsExercise
+# Uis
+Train&Share
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+# Idea
+A web application where people can store their personal training and share them with other users. Each training may have multiple exercises.
 
-## Development server
+# Design
+Public area
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Public users can create new account in the application or login with existing one.
 
-## Code scaffolding
+Private 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Once logged in a user can create new training, delete or update edisting one.
+Its possible to add multiple exercises to a training, or delete exercise from a training.
+Each training can be Private or Public. Only Public trainings can be viewed by everyone.
 
-## Build
+Administration
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Administrators can: lock/unlock user account and make other users Admins
+Administration module is accecible only by authorized users.
