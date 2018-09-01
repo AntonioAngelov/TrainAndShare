@@ -1,5 +1,4 @@
-# Uis
-Train&Share
+# Train&Share
 
 # Idea
 A web application where people can store their personal training and share them with other users. Each training may have multiple exercises.
